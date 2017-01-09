@@ -3,7 +3,7 @@
 #include <ctime>       /* time */
 #include "time.h"
 #include "conio.h"
-#include "utility"
+//#include "utility"
 
 /*---------------------------------------------------------------------
             Function
@@ -11,7 +11,7 @@
 int randomBlockGenerator();
 unsigned int GetField( unsigned int PosX , unsigned int PosY );
 bool isCoolidable (int x1, int y1);
-bool RotateTetrisBlock(int, int x2, int y2);
+bool RotateTetrisBlock(int);
 int move(int movement);
 void InitBoard();
 void display();
@@ -26,10 +26,9 @@ void systemPause () {
     struct timespec timeOut,remains;
 
     timeOut.tv_sec = 0;
-    timeOut.tv_nsec = 700000000; /* 0 milliseconds */
+    timeOut.tv_nsec = 900000000; /* 7 milliseconds */
 
     nanosleep(&timeOut, &remains);
-    //system("cls");
 
 };
 /*---------------------------------------------------------------------
@@ -42,7 +41,7 @@ int x=4,y=0; //cordinates
 int rotateTemp[4][4]={0};
 using namespace std;
 int gameField[17][22];
-int temp[17][22];
+int temp[17][22]={0};
 
 enum Movement_E
 {
@@ -135,7 +134,7 @@ int main ()
     // gameloop
     //a should be a gameover condition and should add end of the game.
     while (!gameOver()) {
-        system("cls");
+
         display();
 
         int movement1;
@@ -168,11 +167,17 @@ int main ()
                 }
             }
             x=4,y=0;
-            makeBlock();
+
+
+            if(!gameOver()) {makeBlock();};
         }
     }
+    move(5);
+    for (int i=0;i<3;i++){
+        systemPause();
+    display();
     cout<<endl;
-    cout<<"Game Over !!!";
+    cout<<"Game Over !!!\n";}
 
 
 
@@ -280,10 +285,10 @@ void makeBlock()
 }
 
 void display(){
-    //system("cls");
+    system("cls");
 
     //*
-     for(int i=0;i<17;i++)
+    for(int i=0;i<17;i++)
     {
         for (int j=0;j<22;j++)
         {
@@ -309,7 +314,9 @@ void display(){
     cout<<"\n1.Move Left        2.Move right \n";
 
     cout<<"3.Rotate clockwise 4.Rotate anti clockwise    5.Down\n";
-    /*
+
+
+    /*   For dispaly arrray checking
     for(int i=0;i<17;i++)
     {
         for (int j=0;j<22;j++)
@@ -336,11 +343,11 @@ int move ( int movement )
             GetField(x+1,y);}
         break;
     case 3:
-        RotateTetrisBlock(1,x,y);
+        RotateTetrisBlock(1);
         break;
 
     case 4:
-        RotateTetrisBlock(2,x,y);
+        RotateTetrisBlock(2);
         break;
     case 5:
         if (!isCoolidable(x,y+1)){
@@ -414,7 +421,7 @@ cout<<temp[y1 + i][x1 + j];
 }
 
 
-bool RotateTetrisBlock(int rotateDirection,int x2,int y2)
+bool RotateTetrisBlock(int rotateDirection)
 {
     //for Clock wise  block rotation
     if(rotateDirection==1){
@@ -427,7 +434,7 @@ bool RotateTetrisBlock(int rotateDirection,int x2,int y2)
             }
         }
         for(int i=0;i<4;i++){
-            for (int k=0 ,j=3;k<4,j>=0;k++,j--){
+            for (int k=0,j=3;k<4,j>=0;k++,j--){
 
                 block[0][i][k]=rotateTemp[j][i];
                 //rotateTemp[i][k]=block[0][j][i];
@@ -461,14 +468,14 @@ bool RotateTetrisBlock(int rotateDirection,int x2,int y2)
     else {
 
         for(int i=0;i<4;i++){
-            for (int k=0 ,j=3;k<4,j>=0;k++,j--){
-                rotateTemp[i][k] = block[0][i][k];
+            for (int j=0;j<4;j++){
+                rotateTemp[i][j] = block[0][i][j];
                 //rotateTemp[i][k]=block[0][j][i];
                 //rotateTemp[i][k];
             }
         }
         for(int i=0;i<4;i++){
-            for (int k=0 ,j=3;k<4,j>=0;k++,j--){
+            for (int j=3;j>=0;j--){
 
                 block[0][i][j]=rotateTemp[j][3-i];
                 //rotateTemp[i][k]=block[0][j][i];
@@ -503,11 +510,13 @@ bool RotateTetrisBlock(int rotateDirection,int x2,int y2)
 
 bool gameOver ()
 {
-    for (int i=0;i<4;i++)
-        for (int j=0;j<4;j++)
-        {
+    for (int i=0;i<3;i++){
+        for (int j=0;j<9;j++)
+        {   cout<<temp[i+1][j+1];
 
-            if(temp[y+i][j+4] + block[0][i][j]>1 ) {return true;}
+            if(temp[i+1][j+1]!=0 ) {return true;}
+
         }
+    }
     return false;
 }
