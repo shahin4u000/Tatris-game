@@ -1,2 +1,3 @@
-# Tatris-game
-Currently working on that project and will post soon. 
+# Tatris-game 
+only for windows console. For simplicity graphics command was not uses. 
+Check updates for Cross platform. 
