@@ -1,3 +1,6 @@
 # Tatris-game 
-only for windows console. For simplicity graphics command was not uses. 
-Check updates for Cross platform. 
+Move Left (a/A)                 Move Right(d/D)
+Rotate counter clockwise(k/K)   Rotate Clock wise(l/L)
+Release (x/X)
+
+#
