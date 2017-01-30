@@ -46,14 +46,6 @@ public :
     virtual unsigned int GetRemovedRows() const = 0 ;
 };
 
-class IPlayer
-{
-public :
-    IPlayer () {} ;
-    virtual ~ IPlayer () {} ;
-	
-    // Plays the given board by moving the block .
-    virtual void Play ( IBoard * pBoard ) = 0 ;
-};
+
 
 #endif /*INTERFACES_H_*/
