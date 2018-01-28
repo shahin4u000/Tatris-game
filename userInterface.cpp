@@ -9,15 +9,6 @@ userInterface::userInterface(IBoard *obj)
 
 void userInterface::Play(IBoard *obj, visualization *showBoard)
 {
-//    for (int i=0;i<17;i++)
-//    {
-//        for (int j=0;j<22;j++) {
-
-//            cout << obj->gameField[i][j];
-//            if (j==21) {cout<<endl;}
-//        }
-//    }
-
     showBoard->display();
 
     while (!obj->IsFinished())
