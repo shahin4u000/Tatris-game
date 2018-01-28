@@ -3,8 +3,6 @@
 userInterface::userInterface(IBoard *obj)
 {
     obj->InitBoard();
-
-
 }
 
 void userInterface::Play(IBoard *obj, visualization *showBoard)
@@ -22,7 +20,6 @@ void userInterface::Play(IBoard *obj, visualization *showBoard)
             cin.ignore();
             cout<<"Wrong Input!!! Choose 1 for AI 2 for User mood:";
             cin>>userInput;
-
         }
 
         switch (userInput)
@@ -53,17 +50,6 @@ void userInterface::Play(IBoard *obj, visualization *showBoard)
             obj->Move(RotateClockwise_e);
              showBoard->display();
             break;
-//        default:
-//            while (cin.fail()) {
-
-//            }
-//            cin.clear();
-//            cin.ignore(1000,'\n');
-//            cout<<"Wrong Input!!! Choose 1 for AI 2 for User mood:";
-//            cin>>userInput;
-//            break;
         }
-
-
     }
 }
